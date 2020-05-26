@@ -1,0 +1,35 @@
+Instalando jenkins no Ubuntu 18.04
+
+Instalar JAVA
+	
+	apt install default-jdk-headless
+
+Instalando o Jenkins
+
+Primeiro, adicione a chave do repositório ao sistema:
+
+	wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+
+Quando a chave for adicionada, o sistema retornará OK. Em seguida, adicione o endereço do repositório de pacotes Debian ao sources.list do servidor:
+
+	sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+Quando ambos estiverem funcionando, execute update para que o apt use o novo repositório:
+
+	sudo apt update
+
+É provável que retornará o erro 
+
+	GPG error: http://pkg.jenkins-ci.org binary/ Release: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY < ???? >
+
+Pegue a chave que está no ???? e coloca no comando abaixo:
+
+	http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key --recv-keys ????
+
+Adicione o source:
+
+	sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+Instale o JENKINS:
+
+	sudo apt-get install jenkins
